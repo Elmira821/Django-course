@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 #For method 3:
@@ -19,6 +20,27 @@ monthly_challenges = {
     'december': "Reflect on your year and set goals!",
 }
 
+def index (request):   # It is a general overview page that doesn't need any specific month information to be passed to it. so it does not need to take month as a argument. 
+
+#This string will accumulate the HTML list items (<li>) for each month.
+    list_items = ""
+
+#This retrieves the keys from the monthly_challenges dictionary and converts into a list
+    months = list(monthly_challenges.keys())    
+
+    for month in months:
+        #Converts the month name to capitalized form (e.g., "january" to "January").
+        capitalized_month = month.capitalize()
+
+        #Uses the reverse function to get the URL for the month challenge page. The reverse function looks up the URL pattern named "month-challenge" and fills in the month name as an argument.
+        month_path = reverse ("month-challenge" , args=[month])
+
+        #This HTML is appended to the list_items string. (initially set as empty string "")
+        list_items += f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"
+
+    response_data = f"<ul>{list_items}</ul>"
+
+    return HttpResponse(response_data)
 
 
 # Method 1:
@@ -62,19 +84,22 @@ def monthly_challenge_by_number (requst, month):
         return HttpResponseNotFound ("invalid month")
     
     redirect_month = months[month - 1]
-    return  HttpResponseRedirect ("/challenges/" + redirect_month)
+    redirect_path = reverse("month-challenge", arg=[redirect_month]) #/challenge/january
+    return  HttpResponseRedirect (redirect_path)
 
 #Retrieve Keys from monthly_challenges: This line creates a list of keys from the monthly_challenges dictionary.
 #monthly_challenges.keys() returns a view of the dictionary's keys.
 #list() converts this view into a list, so months becomes a list of month names.
 #[month - 1] this deduct one from the month, so when we enter 1 we get january instead of feb.
+#args=[redirect_month] provides the necessary parameter(s) for the URL. In this case, redirect_month is the string (like "january") that will be inserted into the URL.
 
 
 def monthly_challenge(requst, month):
     try:
         challenge_text = monthly_challenges[month]
-        return HttpResponse(challenge_text)
+        text_response = f"<h1>{challenge_text}</h1>"  #html
+        return HttpResponse(text_response)
     except:
-        return HttpResponseNotFound("This month is not found")
+        return HttpResponseNotFound("<h1>This month is not found</h1>")
 
 
