@@ -1,0 +1,16 @@
+{% extends "base.html" %}        <!-- for this to work without adding the path, we make changes in settings.py inside templates/ specify base_dir-->
+
+    {% block page_title %}All Challenges{% endblock %}     <!-- this will be injected inside the base.html where page_title is -->
+    
+    {% block content %}
+    <ul>
+        {% for month in months %}     <!-- month: this name up to me-->
+       <!-- <li><a href="/challenges/{{ month }}">{{ month|title}}</a></li> again hard-coded url-->
+
+        <!-- dynamically putting url -->
+       <li><a href="{% url 'month-challenge' month %}">{{ month|title}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+
+

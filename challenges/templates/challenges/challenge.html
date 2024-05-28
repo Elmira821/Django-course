@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ monthly|title }} Challenge
+{% endblock %}
+
+{% block content %}
+    <h1>{{ monthly|title }} Challenge</h1>
+    {% if text %}
+        <h2>{{ text }}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet</p>
+    {% endif %}
+{% endblock %}
+
+<!-- |title  is a build in filter function of django's.   it plays the role of capatilize here. -->
+
+<!-- build-in templates tags & filters: https://docs.djangoproject.com/en/5.0/ref/templates/builtins -->
