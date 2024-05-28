@@ -11,7 +11,7 @@ from . import views
 
 #Method 2.   Setting the value dynamically.
 urlpatterns = [
-    path("", views.index),    #empty because this is sent to the /challenges/ in main url
+    path("", views.index, name="index"),    #empty because this is sent to the /challenges/ in main url
     path('<int:month>/', views.monthly_challenge_by_number),
     path('<str:month>/', views.monthly_challenge, name="month-challenge"),
 ]

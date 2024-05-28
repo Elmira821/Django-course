@@ -3,6 +3,8 @@
     {% block page_title %}All Challenges{% endblock %}     <!-- this will be injected inside the base.html where page_title is -->
     
     {% block content %}
+        {% include "challenges/includes/header.html"%}
+        
     <ul>
         {% for month in months %}     <!-- month: this name up to me-->
        <!-- <li><a href="/challenges/{{ month }}">{{ month|title}}</a></li> again hard-coded url-->
