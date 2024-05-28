@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
 
@@ -117,4 +117,9 @@ def monthly_challenge(requst, month):
         })
     # render function needs a first argument request before the template path
     except:
-        return HttpResponseNotFound("<h1>This month is not found</h1>")
+        response = render_to_string("404.html")
+        return HttpResponseNotFound(response)
+
+    #this will automatically look for 404.html file in the project root. 
+        #raise Http404()   
+    #for this we need to change the settings.py - DEBUG = false (in deployment).  for now we can't do that.
