@@ -18,7 +18,7 @@ monthly_challenges = {
     'september': "Practice meditation every day!",
     'october': "Learn a new skill!",
     'november': "Volunteer at a local charity!",
-    'december': "Reflect on your year and set goals!",
+    'december': None,
 }
 
 

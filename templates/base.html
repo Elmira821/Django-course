@@ -1,9 +1,15 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block page_title %}My Challenges{% endblock %}</title>
+
+    <link ref="stylesheet" href="{% static "base.css" %} "> <!--this is general stylesheet. below is specific-->
+    {% block css_files %}   <!-- to inject our css file here-->
+    {% endblock %}   
 </head>
 <body>
    {% block content %}{% endblock %}
